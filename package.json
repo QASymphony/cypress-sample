@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "delete:reports": "node cleanup-reports.js",
-    "cy:run": "npm run delete:reports && cypress run --browser chrome --reporter junit --reporter-options='mochaFile=results/junit-results-[hash].xml,toConsole=true'"
+    "cy:run": "npm run delete:reports && cypress run --browser chrome --reporter junit --reporter-options='mochaFile=reports/junit-report-[hash].xml,toConsole=true'"
   },
   "repository": {
     "type": "git",
