@@ -4,14 +4,15 @@
   "description": "Sample cypress project that integrates with qTest Automation Host's Universal Agent",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "delete:reports": "rm results/* || true",
+    "cy:run": "npm run delete:reports && cypress run --browser chrome --reporter junit --reporter-options='mochaFile=results/junit-results-[hash].xml,toConsole=true'"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/QASymphony/cypress-sample.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Huy Nguyen",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/QASymphony/cypress-sample/issues"
   },
