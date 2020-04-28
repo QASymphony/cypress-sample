@@ -4,7 +4,7 @@
   "description": "Sample cypress project that integrates with qTest Automation Host's Universal Agent",
   "main": "index.js",
   "scripts": {
-    "delete:reports": "rm results/* || true",
+    "delete:reports": "node cleanup-reports.js",
     "cy:run": "npm run delete:reports && cypress run --browser chrome --reporter junit --reporter-options='mochaFile=results/junit-results-[hash].xml,toConsole=true'"
   },
   "repository": {
