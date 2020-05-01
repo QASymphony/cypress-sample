@@ -1,6 +1,6 @@
 node_modules
 .vscode
-results
+reports
 cypress/fixtures/*
 cypress/screenshots*
 cypress/videos/*
