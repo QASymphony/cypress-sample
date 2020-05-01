@@ -90,7 +90,7 @@ beforeEach(function() {
     // skip this test if its name is *not* included in the test name list
     if (!desiredTestNamesToBeRun.includes(currenExecutingtTestName)) {
       cy.log(`Skip test '${currenExecutingtTestName}' as it's not included in 'tests' env.`);
-      //cy.state('runnable').ctx.skip();
+      cy.state('runnable').ctx.skip();
     }
   }
   else {
