@@ -19,6 +19,44 @@ import './commands'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
+import * as fs from 'fs';
+
+before(function() {
+  cy.log("Global Before Hook");
+  // if (Cypress.env("tests") != undefined) {
+  //   let testRunsFilePath = Cypress.env("tests");
+  //   try {
+  //     let content = fs.readFileSync(testRunsFilePath, 'utf8');
+  //     let testRunListObject = JSON.parse(content);
+  //     let testNames = [];
+  //     testRunListObject.forEach(testrun => {
+  //       let testcase = testrun.test_case;
+  //       testcase.properties.forEach(prop => {
+  //         if (prop.field_name == 'Automation Content') {
+  //           let automationContent = prop.field_value;
+  //           let index = automationContent.indexOf('#');
+  //           if (index > -1) {
+  //             let testName = automationContent.substring(index + 1);
+  //             if (!testNames.includes(testName)) {
+  //               testNames.push(testName);
+  //             }
+  //           }
+  //         }
+  //       });
+  //     });
+  //     if (testNames.length > 0) {
+  //       cy.log(`There are ${testNames.length} tests to be executed`);
+  //       Cypress.env("testnames", testNames);
+  //     }
+  //     else {
+  //       cy.log(`All test will be executed`);
+  //     }
+  //   } catch (error) {
+  //     cy.log('error reading test runs at ' + testRunsFilePath);
+  //   } 
+  // }
+});
+
 /** 
  * Global before hook that runs before every single test is being executed. What it does: 
  * - Checks whether specific test name (or names) are specified in `cypress run --env tests='<array of test names>'` command
@@ -30,7 +68,7 @@ beforeEach(function() {
     let testTitles = [];
     var extractTitles = (obj) => {
       if (obj.hasOwnProperty('parent')) {
-        testTitles.push(obj.title);
+        testTitles.push(obj.title.trim());
         let nextObj = obj.parent;
         extractTitles(nextObj);
       }
@@ -46,12 +84,13 @@ beforeEach(function() {
   // values are either empty if not specified in cypress run command, or and array of test name, like so:
   //    ["<context name> <title 1>","<context name> <describe name> <title 2>","<describe name> <describe name> <title n>", etc. etc.]' 
   let desiredTestNamesToBeRun = Cypress.env("tests");
+  cy.log('Cypress.env("tests"): ' + Cypress.env("tests"));
   if (desiredTestNamesToBeRun != undefined && Array.isArray(desiredTestNamesToBeRun)) {
     // if specific test names are specified in cypress run --env tests='[<test names>]' command, 
     // skip this test if its name is *not* included in the test name list
     if (!desiredTestNamesToBeRun.includes(currenExecutingtTestName)) {
       cy.log(`Skip test '${currenExecutingtTestName}' as it's not included in 'tests' env.`);
-      cy.state('runnable').ctx.skip();
+      //cy.state('runnable').ctx.skip();
     }
   }
   else {

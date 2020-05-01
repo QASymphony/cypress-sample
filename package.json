@@ -6,7 +6,7 @@
   "scripts": {
     "delete:reports": "node cleanup-reports.js",
     "cy:run": "npm run delete:reports && ./node_modules/.bin/cypress run --browser chrome --reporter junit --reporter-options='mochaFile=reports/junit-report-[hash].xml,toConsole=true'",
-    "cy:run:selected": "npm run delete:reports && ./node_modules/.bin/cypress run --browser chrome --reporter junit --reporter-options='mochaFile=reports/junit-report-[hash].xml,toConsole=true' --spec='cypress/integration/examples/actions.spec.js' --env tests='[\"Actions .type() - type into a DOM element\",\"abcxyz\"]'"
+    "cy:run:selected": "npm run delete:reports && ./node_modules/.bin/cypress run --browser chrome --reporter junit --reporter-options='mochaFile=reports/junit-report-[hash].xml,toConsole=true' --env tests='testruns_list.json' --no-exit"
   },
   "repository": {
     "type": "git",
