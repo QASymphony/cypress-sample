@@ -109,11 +109,10 @@ Your agent now looks like below
 
 8. Click Save to finish creating the agent. You will be returned back to the Automation Host home page
 9. From Agent list, locate the agent **Cypress Universal Agent** you just created. Click on action icon in the last column and select `Run Now`
-10. From the run agent dialog, click Execute to execute the agent.
 
 ![Run Agent](/docs/run-now.png)
 
-11. When the execution finished, the agent shows the test results are submitted to qTest, as below screenshots.
+10. From the run agent dialog, click Execute to execute the agent. When the execution finished, the agent shows the test results are submitted to qTest, as below screenshots.
 
 ![Run Agent](/docs/execution-finished.png)
 
