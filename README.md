@@ -132,7 +132,9 @@ Your agent now looks like below
 At this point you are able to integrate your Cypress project with Universal Agent and let it
 - (i) kicks off your entire tests in Cypress and
 - (ii) collects JUnit execution result and
-- (iii) submits results to qTest Manager as test run logs. Now let us move on to schedule only some selected test runs in qTest Manager and let Universal Agent to kick off the execution for only those scheduled test runs in Cypress.
+- (iii) submits results to qTest Manager as test run logs
+
+Now let us move on to schedule only some selected test runs in qTest Manager and let Universal Agent to kick off the execution for only those scheduled test runs in Cypress.
 
 At the time of this writing, Cypress does not support running a specific test (the **it()** function) inside any spec file but the whole specifc spec file only. However, Cypress allows us to programmatically **skip** a specific test before it is executed. So what we are going to do in order to schedule and execute only selected tests in Cypress are:
 
