@@ -127,7 +127,7 @@ Your agent now looks like below
 - Run command to execute Cypress test in Chrome browser and generate junit results in the default reports folder `./node_modules/.bin/cypress run --browser chrome --reporter junit --reporter-options='mochaFile=reports/junit-report-[hash].xml,toConsole=true'`
 3. When the test finished execution, Universal Agent parses the result in reports folder, which is configured in **Path to Results** field, using the selected **JUnit for Java (built-in)** parser then submits the results as test run logs to qTest Manager.
 
-# Schedule and Kick Off selected tests from Cypress project
+# Schedule and Kick Off selected tests in Cypress
 
 At this point you are able to integrate your Cypress project with Universal Agent and let it (i) kicks off your entire tests in Cypress, (ii) collects JUnit execution result and (iii) submits them to qTest Manager. Now let us move on to schedule only some selected test runs in qTest Manager and let Universal Agent to kick off the execution for only those scheduled test runs in Cypress.
 
