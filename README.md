@@ -18,7 +18,7 @@ There also are some extra configurations needed to the cypress projects for test
 ## Run Cypress test from command line
 This step is to verify you can run Cypress test from command line.
 
-1. Still on Terminal (or Command Prompt) window2. 
+1. Still on Terminal (or Command Prompt) window
 2. Enter this command to navigate to source code folder
     1. Mac or Linux: `cd /usr/local/var/cypress-sample`
     2. Windows: `cd "D:\cypress-sample"`
