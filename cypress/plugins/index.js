@@ -15,16 +15,25 @@ var readTestRunsFromEnvVar = (config) => {
   // read the file to collect desired test names to be executed, and also update the config to contains test names only
   // the values of test names will be use later in support/index.js's beforeEach() function
   // to decide whether or not a test should be skipped
-  if (config.env.tests == undefined) {
+  if (config.env.tests == undefined || config.env.tests.trim() == '') {
     return;
   }
-  let testRunsFilePath = config.env.tests;
+
+  let testRunsFilePath = config.env.tests.trim();
   try {
     const fs = require('fs');
     if (!fs.existsSync(testRunsFilePath)) {
       console.log(`the file specified via --env tests='${testRunsFilePath}' does not exist.`);
       return;
     }
+    
+    let htmlDecode = (str) => {
+      str = str ? str.trim() : '';
+      return str.replace(/\&amp\;/g, '\&').replace(/\&gt\;/g, '\>').replace(
+          /\&lt\;/g, '\<').replace(/\&quot\;/g, '\'').replace(/\&\#39\;/g,
+          '\'');
+    };
+
     let content = fs.readFileSync(testRunsFilePath, 'utf8');
     let testRunListObject = JSON.parse(content);
     let testNames = [];
@@ -35,8 +44,8 @@ var readTestRunsFromEnvVar = (config) => {
           let automationContent = prop.field_value;
           let index = automationContent.indexOf('#');
           if (index > -1) {
-            let testName = automationContent.substring(index + 1);
-            if (!testNames.includes(testName)) {
+            let testName = htmlDecode(automationContent.substring(index + 1));
+            if (testName != '' && !testNames.includes(testName)) {
               testNames.push(testName);
             }
           }
@@ -48,7 +57,7 @@ var readTestRunsFromEnvVar = (config) => {
       // this is important in order for Cypress to 'fetch' the updated value of tests env 
       // to Cypress global object and make available during execution
       config.env.tests = testNames;
-      return config;
+      return;
     }
   } catch (error) {
     console.log(`error reading test runs at '${testRunsFilePath}: ${error}`);
@@ -65,5 +74,6 @@ module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
   
-  return readTestRunsFromEnvVar(config);
+  readTestRunsFromEnvVar(config);
+  return config;
 }
