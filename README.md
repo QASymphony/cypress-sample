@@ -118,14 +118,14 @@ Your agent now looks like below
 
 ![Run Agent](/docs/test-results.png)
 
-# Universal Agent's execution workflow explained:
+# Universal Agent's execution workflow explained
 
-1. Executes **Pre-Execute Scripts** to pull the latest source code from this git repo, if the source code is not available in the first time, the script will clone the source code into your automation host machine
+1. Executes **Pre-Execute Scripts** that pulls the latest source code from [this repo](https://github.com/QASymphony/cypress-sample), if the source code is not available in Automation Host machine in the first time, the script will clone the source code into the machine
 2. Universal Agent executes the scripts configured in **Execute Command**. Since **node** executor is chosen, the Universal Agent will execute the code against embedded NodeJS bundled with Automation Host. The execution includes:
 - Run `npm install` to install node modules declared in package.json file
 - Delete reports folder if it exists. This is to clean the old results generated from previous execution and make sure this reports folder always contains latest execution results
-- Run command to execute Cypress test: `./node_modules/.bin/cypress run --browser chrome --reporter junit --reporter-options='mochaFile=reports/junit-report-[hash].xml,toConsole=true'`
-3. When the test finished execution, Universal Agent parses the result in reports folder configured in **Path to Results** field using the selected **JUnit for Java (built-in)** parser, then submits the results as test run logs to qTest Manager.
+- Run command to execute Cypress test in Chrome browser and generate junit results in the default reports folder `./node_modules/.bin/cypress run --browser chrome --reporter junit --reporter-options='mochaFile=reports/junit-report-[hash].xml,toConsole=true'`
+3. When the test finished execution, Universal Agent parses the result in reports folder, which is configured in **Path to Results** field, using the selected **JUnit for Java (built-in)** parser then submits the results as test run logs to qTest Manager.
 
 # Schedule and Kick Off selected tests from Cypress project
 
