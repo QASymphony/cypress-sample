@@ -239,7 +239,7 @@ beforeEach(function() {
   }
 
   let currenExecutingtTestName = getCurrenExecutingtTestName(this.currentTest);
-  // Obtain test names in --env parameter. Refer to the script cypress:run:selected-tests-only in package.json to know how to sepecify specific tests to run
+  // Obtain test names in --env parameter. Refer to the script cy:run:selected in package.json to know how to sepecify specific tests to run
   // values are either empty if not specified in cypress run command, or and array of test name, like so:
   //    ["<context name> <title 1>","<context name> <describe name> <title 2>","<describe name> <describe name> <title n>", etc. etc.]' 
   let desiredTestNamesToBeRun = Cypress.env("tests");
