@@ -129,12 +129,15 @@ Your agent now looks like below
 
 # Schedule and Kick Off selected tests in Cypress
 
-At this point you are able to integrate your Cypress project with Universal Agent and let it (i) kicks off your entire tests in Cypress, (ii) collects JUnit execution result and (iii) submits them to qTest Manager. Now let us move on to schedule only some selected test runs in qTest Manager and let Universal Agent to kick off the execution for only those scheduled test runs in Cypress.
+At this point you are able to integrate your Cypress project with Universal Agent and let it
+- (i) kicks off your entire tests in Cypress and
+- (ii) collects JUnit execution result and
+- (iii) submits results to qTest Manager as test run logs. Now let us move on to schedule only some selected test runs in qTest Manager and let Universal Agent to kick off the execution for only those scheduled test runs in Cypress.
 
 At the time of this writing, Cypress does not support running a specific test (the **it()** function) inside any spec file but the whole specifc spec file only. However, Cypress allows us to programmatically **skip** a specific test before it is executed. So what we are going to do in order to schedule and execute only selected tests in Cypress are:
 
-1. In Universal Agent's Execute Command, pickups the test runs being scheduled for test execution from the Universal Agent magic variable naming **$TESTRUNS_LIST**, then pass them to Cypress' execute command under parameters named `--env tests='<selected tests to run>'`. Since the scheduled test runs can be plenty (the user are allowed to schedule unlimited test runs in qTest Launch) we cannot pass the test runs as plain text (with some sort of delimiters) to the Cypress command as we will likely encounter the OS length limit for a shell/bash command, the approach is we will save the scheduled test runs to a file and pass the file path to Cypress execute command. So the Cypress command will be something like: `--env tests='/path/to/testruns_list.json'`
-2. In Cypress, we will add code to the [plugin](https://docs.cypress.io/guides/tooling/plugins-guide.html#Use-Cases), which is conventionally located at `cypress/plugin/index.js`, to loads the test runs from the file, then push them to the Global object Cypress.env("testnames"), as below:
+1. In Universal Agent's Execute Command, pickups the test runs's automation contents that are being scheduled for test execution from the Universal Agent magic variable naming **$TESTRUNS_LIST**, then pass them to Cypress' execute command under parameters named `--env tests='<selected tests to run>'`. Since the scheduled test runs can be plenty (the user are allowed to schedule unlimited test runs in qTest Launch) we cannot pass the test runs as plain text (with some sort of delimiters) to the Cypress command as we will likely encounter the OS length limit for a shell/bash command, the approach is we will save the scheduled test runs to a file and pass the file path to Cypress execute command. So the Cypress command will be something like: `--env tests='/path/to/testruns_list.json'`
+2. In Cypress, we will add code to the [plugin](https://docs.cypress.io/guides/tooling/plugins-guide.html#Use-Cases), which is conventionally located at `cypress/plugin/index.js`, to loads scheduled test runs from the file, then push them to the Global object Cypress.env("testnames"), as below:
 
 ```
 // cypress/plugin/index.js
@@ -210,8 +213,8 @@ module.exports = (on, config) => {
 ```
 
 3. Next, we will also add code to `cypress/support/index.js` that hooks into **beforeEach()** function, which will be invoked every time a specific test is about to be executed in any spec file. What it does is to:
-- Check if there are scheduled test runs to be executed from the global Cyptess.env("testnames") variable whose values is populated in previous step. If there is no test run being scheduled, execute the test in Cypress. Workflow ends.
-- Otherwise, if there are test runs to be schedule for execution from the Cyptess.env("testnames"), try to match the name of the test (that is about to be executed) with a test run in Cyptess.env("testnames"). If there is no matching, **skip the test**
+- Check if there are scheduled test runs to be executed from the global Cyptess.env("testnames") variable whose value is populated in previous step. If there is no test run being scheduled, execute the test in Cypress. Workflow ends.
+- Otherwise, if there are test runs to be scheduled for execution in Cyptess.env("testnames") variable, try to match the name of the test (that is about to be executed) with a test run in Cyptess.env("testnames"). If there is no matching, **skip the test**
 
 Below code demonstrates this step
 
