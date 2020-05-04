@@ -103,7 +103,7 @@ try {
 - Windows: enter `D:\cypress-sample\reports`
 7. Result Parser: select `JUnit for Java (built-in)`
 
-Your agent now look like below
+Your agent now looks like below
 
 ![Cypress Universal Agent](/docs/cypress-agent.png)
 
