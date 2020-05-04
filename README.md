@@ -317,6 +317,6 @@ try {
 
 ![Poll Now](/docs/poll-now.png)
 
-9. Wait for the execution completes then go to qTest Manager's Test Execution to verify that the 3 test runs have been executed in Cypress and their results are submitted. Screenshot below shows the first test run having 2 **Execution History** as well the 
+9. Wait for the execution completes then go to qTest Manager's Test Execution to verify that the 3 test runs have been executed in Cypress and their results are submitted. Screenshot below shows the first test run having **Execution History** increased to 2.
 
 ![Execution History](/docs/execution-history.png)
