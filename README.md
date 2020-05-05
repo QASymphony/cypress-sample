@@ -120,7 +120,7 @@ Your agent now looks like below
 
 # Universal Agent's execution workflow explained
 
-1. Executes **Pre-Execute Scripts** that pulls the latest source code from [this repo](https://github.com/QASymphony/cypress-sample), if the source code is not available in Automation Host machine in the first time, the script will clone the source code into the machine
+1. Universal Agent executes **Pre-Execute Scripts** that pulls the latest source code from [this repo](https://github.com/QASymphony/cypress-sample), if the source code is not available in Automation Host machine in the first time, the script will clone the source code into the machine
 2. Universal Agent executes the scripts configured in **Execute Command**. Since **node** executor is chosen, the Universal Agent will execute the code against embedded NodeJS bundled with Automation Host. The execution includes:
 - Run `npm install` to install node modules declared in package.json file
 - Delete reports folder if it exists. This is to clean the old results generated from previous execution and make sure this reports folder always contains latest execution results
