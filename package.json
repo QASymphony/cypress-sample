@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/QASymphony/cypress-sample#readme",
   "devDependencies": {
-    "cross-env": "^7.0.2",
     "cypress": "^4.4.1"
   }
 }
