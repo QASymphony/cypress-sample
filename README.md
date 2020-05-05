@@ -104,7 +104,7 @@ try {
 ```
 6. Path to Results: enter path to test result folder that is relative to the source folder
 - Mac: enter `/usr/local/var/cypress-sample/reports`
-- Windows: enter `D:\cypress-sample\reports`
+- Windows: enter `C:\universal-agent-samples\cypress-sample\reports`
 7. Result Parser: select `JUnit for Java (built-in)`
 
 Your agent now looks like below
