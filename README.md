@@ -10,7 +10,7 @@ There also are some extra configurations needed to the cypress project for test 
 
 ## Setup
 
-1. Download sample source code in this repo under .zip package and extract them to
+1. Download sample source code in this repo under cypress-sample-master.zip package and extract them to
     - Windows: `C:\universal-agent-samples\cypress-sample-master`
     - Linux or Mac: `/usr/local/var/cypress-sample-master`
 2. Open Terminal (for Mac or Linux), or Command Prompt if you are on Windows
