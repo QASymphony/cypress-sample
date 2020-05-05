@@ -215,8 +215,8 @@ module.exports = (on, config) => {
 ```
 
 3. Next, we will also add code to `cypress/support/index.js` that hooks into **beforeEach()** function, which will be invoked every time a specific test is about to be executed in any spec file. What it does is to:
-- Check if there are scheduled test runs to be executed from the global Cyptess.env("testnames") variable whose value is populated in previous step. If there is no test run being scheduled, execute the test in Cypress. Workflow ends.
-- Otherwise, if there are test runs to be scheduled for execution in Cyptess.env("testnames") variable, try to match the name of the test (that is about to be executed) with a test run in Cyptess.env("testnames"). If there is no matching, **skip the test**
+- Check if there are scheduled test runs to be executed from the global Cyptess.env("tests") variable whose value is populated in previous step. If there is no test run being scheduled, execute the test in Cypress. Workflow ends.
+- Otherwise, if there are test runs to be scheduled for execution in Cyptess.env("tests") variable, try to match the name of the test that is about to be executed with a test run in Cyptess.env("tests"). If there is no matching, **skip the test**
 
 Below code demonstrates this step
 
