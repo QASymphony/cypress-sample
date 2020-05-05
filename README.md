@@ -9,24 +9,30 @@ There also are some extra configurations needed to the cypress project for test 
 2. NodeJS 8+
 
 ## Setup
-1. Open Terminal (for Mac or Linux), or Command Prompt if you are on Windows
-2. Navigate to source code folder
-    1. Mac or Linux: `cd /usr/local/var/cypress-sample`
-    2. Windows: `cd "C:\universal-agent-samples\cypress-sample"`
-3. Run this command to install Cypress: `npm install`
+
+1. Download sample source code in this repo under .zip package and extract them to
+    - Windows: `C:\universal-agent-samples\cypress-sample-master`
+    - Linux or Mac: `/usr/local/var/cypress-sample-master`
+2. Open Terminal (for Mac or Linux), or Command Prompt if you are on Windows
+3. Navigate to source code folder
+    1. Mac or Linux: `cd /usr/local/var/cypress-sample-master`
+    2. Windows: `cd "C:\universal-agent-samples\cypress-sample-master"`
+4. Run this command to install Cypress: `npm install`
 
 ## Run Cypress test from command line
 This step is to verify you can run Cypress test from command line.
 
 1. Still on Terminal (or Command Prompt) window
 2. Enter this command to navigate to source code folder
-    1. Mac or Linux: `cd /usr/local/var/cypress-sample`
-    2. Windows: `cd "C:\universal-agent-samples\cypress-sample"`
+    1. Mac or Linux: `cd /usr/local/var/cypress-sample-master`
+    2. Windows: `cd "C:\universal-agent-samples\cypress-sample-master"`
 3. Run this command to execute Cypress test dependent on your Operting System
     - Mac or Linux: `node_modules/.bin/cypress run --browser chrome`
     - Windows: `node_modules\.bin\cypress run --browser chrome`
 
 You should see Cypress is launched and all the tests are executed afterward on Chrome browser.
+
+4. Now you can delete the sample code folder `cypress-sample-master`
 
 ## Integrate Cypress test with Universal Agent
 Follow these steps to integrate this Cypress sample test project with Automation Host's Universal Agent.
@@ -38,7 +44,8 @@ Follow these steps to integrate this Cypress sample test project with Automation
 - Agent Name: Cypress Universal Agent
 - qTest Manager Project: qConnect Sample Project
 - Agent Type: Universal Agent
-- Pre-Execute Scripts: enter the following script dependent on your Operating System
+- Pre-Execute Scripts: we will setup Pre-Execute Scripts to clone the source code in this repo to automation host machine (or pull the latest updates if the source code has already existed), so make sure these folder is 
+    1. Linux or Mac: /usr/local/var/cypress-sample
 
 **Mac**
 ```
@@ -53,6 +60,7 @@ else
 fi
 ```
 **Windows**
+
 ```
 if not exist "C:\universal-agent-samples\cypress-sample" (
  cd /d D:\
@@ -91,7 +99,7 @@ if (fs.existsSync(reportDir)) {
 try {
   let cypressCommand = isWin ? 'node_modules\.bin\cypress' : 'node_modules/.bin/cypress';
   let reporterOptions = isWin ? 'mochaFile=reports\junit-report-[hash].xml,toConsole=true' : 'mochaFile=reports/junit-report-[hash].xml,toConsole=true';
-  let testCommand = `${cypressCommand} run --browser chrome --reporter junit --reporter-options='${reporterOptions}'`;
+  let testCommand = `${cypressCommand} run --browser chrome --reporter junit --reporter-options '${reporterOptions}'`;
   console.log(`executing testCommand: ${testCommand}`);
   execSync(testCommand, { cwd: workingDir, stdio: 'inherit'});
 } catch (error) {
@@ -292,11 +300,11 @@ try {
    */
   let cypressCommand = isWin ? 'node_modules\.bin\cypress' : 'node_modules/.bin/cypress';
   let reporterOptions = isWin : 'mochaFile=reports\junit-report-[hash].xml,toConsole=true' : 'mochaFile=reports/junit-report-[hash].xml,toConsole=true';
-  let testCommand = `node_modules/.bin/cypress run --browser chrome --reporter junit --reporter-options='${reporterOptions}'`;
+  let testCommand = `node_modules/.bin/cypress run --browser chrome --reporter junit --reporter-options "${reporterOptions}"`;
   if ($TESTRUNS_LIST != undefined && $TESTRUNS_LIST.trim() != null) {
     testrunsListFilePath = path.resolve(process.cwd(), 'testruns_list.json');
     fs.writeFileSync(testrunsListFilePath, $TESTRUNS_LIST);
-    testCommand = `${cypressCommand} run --env tests='${testrunsListFilePath}' --browser chrome --reporter junit --reporter-options='${reporterOptions}'`;
+    testCommand = `${cypressCommand} run --env tests='${testrunsListFilePath}' --browser chrome --reporter junit --reporter-options "${reporterOptions}"`;
 
   }
   console.log(`executing testCommand: ${testCommand}`);
