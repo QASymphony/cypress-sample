@@ -12,7 +12,7 @@ There also are some extra configurations needed to the cypress project for test 
 1. Open Terminal (for Mac or Linux), or Command Prompt if you are on Windows
 2. Navigate to source code folder
     1. Mac or Linux: `cd /usr/local/var/cypress-sample`
-    2. Windows: `cd "D:\cypress-sample"`
+    2. Windows: `cd "C:\universal-agent-samples\cypress-sample"`
 3. Run this command to install Cypress: `npm install`
 
 ## Run Cypress test from command line
@@ -21,10 +21,12 @@ This step is to verify you can run Cypress test from command line.
 1. Still on Terminal (or Command Prompt) window
 2. Enter this command to navigate to source code folder
     1. Mac or Linux: `cd /usr/local/var/cypress-sample`
-    2. Windows: `cd "D:\cypress-sample"`
-3. Run this command to execute Cypress test `npm run cy:run`. (Refer to package.json for detail information regarding this npm script)
+    2. Windows: `cd "C:\universal-agent-samples\cypress-sample"`
+3. Run this command to execute Cypress test dependent on your Operting System
+    - Mac or Linux: `node_modules/.bin/cypress run --browser chrome`
+    - Windows: `node_modules\.bin\cypress run --browser chrome`
 
-You should see Cypress is launched and all the tests are executed afterward.
+You should see Cypress is launched and all the tests are executed afterward on Chrome browser.
 
 ## Integrate Cypress test with Universal Agent
 Follow these steps to integrate this Cypress sample test project with Automation Host's Universal Agent.
