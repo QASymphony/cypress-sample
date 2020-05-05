@@ -29,7 +29,7 @@ You should see Cypress is launched and all the tests are executed afterward.
 ## Integrate Cypress test with Universal Agent
 Follow these steps to integrate this Cypress sample test project with Automation Host's Universal Agent.
 
-1. [Download and install qTest Automation Host](https://support.tricentis.com/community/manuals_detail.do?lang=en&version=On-Demand&module=Tricentis%20qTest%20On-Demand&url=qtest_launch/qtest_ahub_2_user_guides/download_qtest_automation_host2.htm)
+1. [Download and install qTest Automation Host 2.3.4 or later](https://support.tricentis.com/community/manuals_detail.do?lang=en&version=On-Demand&module=Tricentis%20qTest%20On-Demand&url=qtest_launch/qtest_ahub_2_user_guides/download_qtest_automation_host2.htm)
 2. Open web browser and navigate to Automation Host UI at http://localhost:6789 (assuming you installed automation host with  default port, which is 6789. Otherwise, make sure you change the port number 6789 to your port number)
 3. Select `+ Add` button to create a new agent.
 4. On New Agent dialog, enter the followings:
