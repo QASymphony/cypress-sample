@@ -22,7 +22,7 @@ This step is to verify you can run Cypress test from command line.
 2. Enter this command to navigate to source code folder
     1. Mac or Linux: `cd /usr/local/var/cypress-sample`
     2. Windows: `cd "D:\cypress-sample"`
-3. Run this command to execute Protractor test `npm run cy:run`. (Refer to package.json for detail information regarding this npm script)
+3. Run this command to execute Cypress test `npm run cy:run`. (Refer to package.json for detail information regarding this npm script)
 
 You should see Cypress is launched and all the tests are executed afterward.
 
