@@ -253,8 +253,8 @@ beforeEach(function() {
   let desiredTestNamesToBeRun = Cypress.env("tests");
   cy.log('Cypress.env("tests"): ' + Cypress.env("tests"));
   if (desiredTestNamesToBeRun != undefined && Array.isArray(desiredTestNamesToBeRun)) {
-    // if specific test names are specified in cypress run --env tests='[<test names>]' command, 
-    // skip this test if its name is *not* included in the test name list
+    // since test name list are specified in Cypress.env("tests"), 
+    // skip this test if its name is *not* included in the list
     if (!desiredTestNamesToBeRun.includes(currentExecutingTestName)) {
       cy.log(`Skip test '${currentExecutingTestName}' as it's not included in 'tests' env.`);
       cy.state('runnable').ctx.skip();
@@ -290,9 +290,9 @@ if (fs.existsSync(reportDir)) {
 let testrunsListFilePath = '';
 try {
   /**
-   *  Kick off cypress tests. What it does is to check if there are tests being scheduled from qTest Manager by checking the $TESTCASES_AC magic variable
-   *    1.1. if $TESTRUNS_LIST value is empty: build cypress execute command that execute all the tests
-   *    1.2. if $TESTRUNS_LIST value is NOT empty: save the list into testruns_list.json in the project folder, and rebuild cypress execute command to specify it
+   *  Kick off cypress tests. What it does is to check if there are tests being scheduled from qTest Manager by checking the $TESTRUNS_LIST magic variable
+   *    1.1. if $TESTRUNS_LIST value is empty: build cypress command that execute all the tests
+   *    1.2. if $TESTRUNS_LIST value is NOT empty: save the list into testruns_list.json in the project folder, and rebuild cypress command to specify the test via --env tests="/path/to/testruns_list.json"
    */
   let cypressCommand = isWin ? 'node_modules\\.bin\\cypress' : 'node_modules/.bin/cypress';
   let reporterOptions = isWin ? 'mochaFile=reports\\junit-report-[hash].xml,toConsole=true' : 'mochaFile=reports/junit-report-[hash].xml,toConsole=true';
@@ -300,7 +300,7 @@ try {
   if ($TESTRUNS_LIST != undefined && $TESTRUNS_LIST.trim() != null) {
     testrunsListFilePath = path.resolve(process.cwd(), 'testruns_list.json');
     fs.writeFileSync(testrunsListFilePath, $TESTRUNS_LIST);
-    testCommand = `${cypressCommand} run --env tests='${testrunsListFilePath}' --browser chrome --reporter junit --reporter-options "${reporterOptions}"`;
+    testCommand = `${cypressCommand} run --env tests="${testrunsListFilePath}" --browser chrome --reporter junit --reporter-options "${reporterOptions}"`;
   }
   console.log(`executing testCommand: ${testCommand}`);
   execSync(testCommand, { cwd: workingDir, stdio: 'inherit'});
