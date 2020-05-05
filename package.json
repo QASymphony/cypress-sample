@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "delete:reports": "node cleanup-reports.js",
-    "cy:run": "cross-env npm run delete:reports && node_modules/.bin/cypress run --browser chrome --reporter junit --reporter-options='mochaFile=reports/junit-report-[hash].xml,toConsole=true'",
+    "cy:run": "npm run delete:reports && node_modules/.bin/cypress run --browser chrome --reporter junit --reporter-options='mochaFile=reports/junit-report-[hash].xml,toConsole=true'",
     "cy:run:selected": "npm run delete:reports && node_modules/.bin/cypress run --browser chrome --reporter junit --reporter-options='mochaFile=reports/junit-report-[hash].xml,toConsole=true' --env tests='testruns_list.json'"
   },
   "repository": {
@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/QASymphony/cypress-sample#readme",
   "devDependencies": {
-    "cross-env": "^7.0.2",
     "cypress": "^4.4.1"
   }
 }
