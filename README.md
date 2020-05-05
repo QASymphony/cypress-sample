@@ -238,7 +238,7 @@ beforeEach(function() {
     return testName;
   }
 
-  let currenExecutingtTestName = getCurrenExecutingtTestName(this.currentTest);
+  let currentExecutingtTestName = getCurrenExecutingtTestName(this.currentTest);
   // Obtain test names in --env parameter. Refer to the script cy:run:selected in package.json to know how to sepecify specific tests to run
   // values are either empty if not specified in cypress run command, or and array of test name, like so:
   //    ["<context name> <title 1>","<context name> <describe name> <title 2>","<describe name> <describe name> <title n>", etc. etc.]' 
@@ -247,8 +247,8 @@ beforeEach(function() {
   if (desiredTestNamesToBeRun != undefined && Array.isArray(desiredTestNamesToBeRun)) {
     // if specific test names are specified in cypress run --env tests='[<test names>]' command, 
     // skip this test if its name is *not* included in the test name list
-    if (!desiredTestNamesToBeRun.includes(currenExecutingtTestName)) {
-      cy.log(`Skip test '${currenExecutingtTestName}' as it's not included in 'tests' env.`);
+    if (!desiredTestNamesToBeRun.includes(currentExecutingtTestName)) {
+      cy.log(`Skip test '${currentExecutingtTestName}' as it's not included in 'tests' env.`);
       cy.state('runnable').ctx.skip();
     }
   }
