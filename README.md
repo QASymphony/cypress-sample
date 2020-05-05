@@ -87,7 +87,7 @@ if (fs.existsSync(reportDir)) {
 }
 
 try {
-  let testCommand = `./node_modules/.bin/cypress run --browser chrome --reporter junit --reporter-options='mochaFile=reports/junit-report-[hash].xml,toConsole=true'`;
+  let testCommand = `cross-env node_modules/.bin/cypress run --browser chrome --reporter junit --reporter-options='mochaFile=reports/junit-report-[hash].xml,toConsole=true'`;
   console.log(`executing testCommand: ${testCommand}`);
   execSync(testCommand, { cwd: workingDir, stdio: 'inherit'});
 } catch (error) {
@@ -286,11 +286,11 @@ try {
    *    1.1. if $TESTRUNS_LIST value is empty: build cypress execute command that execute all the tests
    *    1.2. if $TESTRUNS_LIST value is NOT empty: save the list into testruns_list.json in the project folder, and rebuild cypress execute command to specify it
    */
-  let testCommand = `./node_modules/.bin/cypress run --browser chrome --reporter junit --reporter-options='mochaFile=reports/junit-report-[hash].xml,toConsole=true'`;
+  let testCommand = `cross-env node_modules/.bin/cypress run --browser chrome --reporter junit --reporter-options='mochaFile=reports/junit-report-[hash].xml,toConsole=true'`;
   if ($TESTRUNS_LIST != undefined && $TESTRUNS_LIST.trim() != null) {
     testrunsListFilePath = path.resolve(process.cwd(), 'testruns_list.json');
     fs.writeFileSync(testrunsListFilePath, $TESTRUNS_LIST);
-    testCommand = `./node_modules/.bin/cypress run --env tests='${testrunsListFilePath}' --browser chrome --reporter junit --reporter-options='mochaFile=reports/junit-report-[hash].xml,toConsole=true'`;
+    testCommand = `cross-env node_modules/.bin/cypress run --env tests='${testrunsListFilePath}' --browser chrome --reporter junit --reporter-options='mochaFile=reports/junit-report-[hash].xml,toConsole=true'`;
 
   }
   console.log(`executing testCommand: ${testCommand}`);
