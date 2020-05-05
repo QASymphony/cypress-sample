@@ -301,7 +301,6 @@ try {
     testrunsListFilePath = path.resolve(process.cwd(), 'testruns_list.json');
     fs.writeFileSync(testrunsListFilePath, $TESTRUNS_LIST);
     testCommand = `${cypressCommand} run --env tests='${testrunsListFilePath}' --browser chrome --reporter junit --reporter-options "${reporterOptions}"`;
-
   }
   console.log(`executing testCommand: ${testCommand}`);
   execSync(testCommand, { cwd: workingDir, stdio: 'inherit'});
