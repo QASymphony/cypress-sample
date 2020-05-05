@@ -30,7 +30,7 @@ This step is to verify you can run Cypress test from command line.
     - Mac or Linux: `node_modules/.bin/cypress run --browser chrome`
     - Windows: `node_modules\.bin\cypress run --browser chrome`
 
-You should see Cypress is launched and all the tests are executed afterward on Chrome browser.
+You should see Cypress is launched and all the tests are executed on Chrome browser. The execution will take some times as Cypress is executing all the specs in this sample so if you don't want to wait for the execution to be finished, simply press `Ctrl + C` to terminate the execution.
 
 4. Now you can delete the sample code folder `cypress-sample-master`
 
