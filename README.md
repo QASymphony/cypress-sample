@@ -104,10 +104,6 @@ try {
   execSync(testCommand, { cwd: workingDir, stdio: 'inherit'});
 } catch (error) {
   console.error('Error executing test: ' + error);
-} finally {
-  if (testrunsListFilePath != "" && fs.existsSync(testrunsListFilePath)) {
-    fs.unlinkSync(testrunsListFilePath);
-  }
 }
 ```
 6. Path to Results: enter path to test result folder that is relative to the source folder
