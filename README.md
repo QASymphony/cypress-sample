@@ -125,7 +125,7 @@ Your agent now looks like below
 - Run `npm install` to install node modules declared in package.json file
 - Delete reports folder if it exists. This is to clean the old results generated from previous execution and make sure this reports folder always contains latest execution results
 - Run command to execute Cypress test in Chrome browser and generate junit results in the default reports folder `./node_modules/.bin/cypress run --browser chrome --reporter junit --reporter-options='mochaFile=reports/junit-report-[hash].xml,toConsole=true'`
-3. When the test finished execution, Universal Agent parses the result in reports folder, which is configured in **Path to Results** field, using the selected **JUnit for Java (built-in)** parser then submits the results as test run logs to qTest Manager.
+3. When the test execution finished, Universal Agent parses the result in reports folder, which is configured in **Path to Results** field, using the selected **JUnit for Java (built-in)** parser then submits the results as test run logs to qTest Manager.
 
 # Schedule and Kick Off selected tests in Cypress
 
