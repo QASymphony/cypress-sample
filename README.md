@@ -295,7 +295,7 @@ try {
    *    1.2. if $TESTRUNS_LIST value is NOT empty: save the list into testruns_list.json in the project folder, and rebuild cypress execute command to specify it
    */
   let cypressCommand = isWin ? 'node_modules\\.bin\\cypress' : 'node_modules/.bin/cypress';
-  let reporterOptions = isWin : 'mochaFile=reports\\junit-report-[hash].xml,toConsole=true' : 'mochaFile=reports/junit-report-[hash].xml,toConsole=true';
+  let reporterOptions = isWin ? 'mochaFile=reports\\junit-report-[hash].xml,toConsole=true' : 'mochaFile=reports/junit-report-[hash].xml,toConsole=true';
   let testCommand = `${cypressCommand} run --browser chrome --reporter junit --reporter-options "${reporterOptions}"`;
   if ($TESTRUNS_LIST != undefined && $TESTRUNS_LIST.trim() != null) {
     testrunsListFilePath = path.resolve(process.cwd(), 'testruns_list.json');
