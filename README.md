@@ -328,7 +328,7 @@ try {
 
 ![Select Tests in qTest Manager](/docs/select-tests.png)
 
-6. You will be navigated to qTest Launch. On the **Schedule Test Run: Select Cases** screen, you'll see the 3 test runs you selected in qTest Manager's Test Execution are automatally populated and selected. Enter schedule name and click NEXT.
+6. You will be navigated to qTest Launch. On the **Schedule Test Run: Select Cases** screen, you'll see the 3 test runs you selected in qTest Manager's Test Execution being automatically populated and selected. Enter schedule name and click NEXT.
 
 ![Schedule Test](/docs/schedule-tests.png)
 
