@@ -1,7 +1,12 @@
 # cypress-sample
-Cypress project that integrates with qTest Automation Host's Universal Agent. 
+Cypress project that integrates with qTest Automation Host's Universal Agent. Target audiences of this document are:
+    - qTest users who are using [Cypress](https://www.cypress.io/) for test automation in their organization and 
+    - want to integrate their Cypress project with qTest Automation Host's Universal Agent and/or
+    - want to leverage qTest Launch to:
+        - schedule and kick off Cypress test execution, either entire tests in their Cypress project or just some selected tests only and/or
+        - collect Cypress execution results an submit to qTest Manager for visibility and centalizied management
 
-There are extra configurations/hooks needed to be put into the cypress project for [test scheduling](https://documentation.tricentis.com/qtest/od/en/content/qtest_launch/launch_user_guides/schedule_and_kick_off_test_automation_in_qtest_launch.htm) to work in qTest Launch and Universal Agent. When you get this sample up and running properly and want to integrate your actual Cypress project with Universal Agent, make sure you follow the section **Schedule and Kick Off Selected Tests in Cypress** at the end of this document.
+** Notes:** there are extra configurations/hooks needed to be put into the cypress project for [test scheduling](https://documentation.tricentis.com/qtest/od/en/content/qtest_launch/launch_user_guides/schedule_and_kick_off_test_automation_in_qtest_launch.htm) to work in qTest Launch and Universal Agent. When you get this sample up and running properly and want to integrate your actual Cypress project with Universal Agent, make sure you follow the section **Schedule and Kick Off Selected Tests in Cypress** at the end of this document.
 
 ## Pre-requitesites
 1. [Git](https://git-scm.com/downloads) client installed. To verify if git client is installed properly, open Command Prompt on Windows, or Terminal on Mac, then execute this command `git --version`
@@ -131,6 +136,7 @@ Your agent now looks like below
     - Run `npm install` to install node modules declared in package.json file
     - Delete reports folder if it exists. This is to clean the old results generated from previous execution and make sure this reports folder always contains latest execution results
     - Run Cypress command to execute Cypress test in Chrome browser and generate junit results in the default reports folder. Dependent on the Operating System you are in, this command will be programmatically executed:
+        
         **Mac or Linux**
         ```
         node_modules/.bin/cypress run --browser chrome --reporter junit --reporter-options "mochaFile=reports/junit-report-[hash].xml,toConsole=true"
