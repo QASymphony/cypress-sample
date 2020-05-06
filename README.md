@@ -88,7 +88,7 @@ Follow these steps to integrate this Cypress sample test project with Automation
         // install node module with below command
         execSync('npm install', { cwd: workingDir, stdio: 'inherit'});
 
-        // delete report dir if it exists to make sure we will have a latest reports after execution
+        // delete report dir if it exists to make sure we will have latest reports after each execution
         if (fs.existsSync(reportDir)) {
           let deleteCommand = isWin ? `rmdir /s /q "${reportDir}"` : `rm -rf "${reportDir}"`;
           execSync(deleteCommand, { cwd: workingDir, stdio: 'inherit'});
