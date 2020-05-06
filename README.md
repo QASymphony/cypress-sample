@@ -250,7 +250,7 @@ module.exports = (on, config) => {
 }
 ```
 
-3. Next, we will also add code to [cypress/support/index.js](https://github.com/QASymphony/cypress-sample/blob/master/cypress/support/index.js) to hooks into **beforeEach()** function (refer to [this documentation](https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests.html#Support-file for more information on Cypress support file), which will be invoked every time a test is about to be executed in any spec file. What it does are to:
+3. Next, we will also add code to [cypress/support/index.js](https://github.com/QASymphony/cypress-sample/blob/master/cypress/support/index.js) to hooks into **beforeEach()** function (refer to [this documentation](https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests.html#Support-file) for more information on Cypress support file), which will be run every time a test is about to be executed in any spec file. What it does are to:
 - Check if there are test names from the global Cyptess.env("tests") whose value are an array which is populated in previous step. If there is no test names from Cyptess.env("tests"), execute this test in Cypress. Workflow ends.
 - Otherwise, if there are test names from Cyptess.env("tests"), try to match the name of the current executing test with a test name in Cyptess.env("tests"). If there is no matching, **skip the test**
 
