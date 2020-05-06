@@ -157,7 +157,7 @@ At this point you are able to integrate your Cypress project with Universal Agen
 
 Now let us move on to schedule only some selected test runs in qTest Manager and let Universal Agent kick off the execution for only those scheduled test runs in Cypress.
 
-At the time of this writing, Cypress does not support running a specific test (the **it()** function) inside any spec file but the whole specifc spec file only. However, Cypress allows us to programmatically **skip** a specific test before it is executed. So what we are going to do in order to schedule and execute only selected tests in Cypress are:
+At the time of this writing, Cypress does not support running a specific test (the **it()** function) inside any spec file but the whole specifc spec file only. Fortunately, Cypress allows us to programmatically **skip** a specific test before it is executed. So what we are going to do in order to schedule and execute only selected tests in Cypress are:
 
 1. In **Execute Command**, we will programmatically instruct the Universal Agent to get the scheduled test runs' automation content from Universal Agent's [magic variable](https://support.tricentis.com/community/manuals_detail.do?lang=en&version=On-Demand&module=Tricentis%20qTest%20On-Demand&url=qtest_launch/universal_agent_user_guides/using_magic_variables_in_universal_agent.htm) naming **$TESTRUNS_LIST**, then pass them to Cypress' execute command via parameter named `--env`. So the command might look something like this:
 
@@ -173,7 +173,7 @@ The approach is to save the scheduled test runs (again, contained in the **$TEST
 cypress run --env tests="/path/to/testruns_list.json"
 ```
 
-2. Next, in our Cypress project, we will add code to the plugin, which is conventionally located at <path/to/your/project>/cypress/plugin/index.js, for it to loads test runs' automation contents from the file `testruns_list.json`, then push them to the Global object Cypress.env("tests") as an array of test names that we will use later. Below is the code that we will put into cypress/plugin/index.js. **Note:** you do not need to do this as the code has already available in this sample project at [cypress/plugin/index.js](https://github.com/QASymphony/cypress-sample/blob/master/cypress/plugins/index.js)), however, when integrating your actual Cypress project, make sure you put this code into your cypress/plugin/index.js file.
+2. Next, in our Cypress project, we will add code to the plugin (refer to [this documentation](https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests.html#Plugin-files) for more information on Cypress plugin), which is conventionally located at <path/to/your/project>/cypress/plugin/index.js, for it to loads test runs' automation contents from the file `testruns_list.json`, then push them to the Global object Cypress.env("tests") as an array of test names that we will use later. Below is the code that we will put into cypress/plugin/index.js. **Note:** you do not need to do this as the code has already available in this sample project at [cypress/plugin/index.js](https://github.com/QASymphony/cypress-sample/blob/master/cypress/plugins/index.js)), however, when integrating your actual Cypress project, make sure you put this code into your cypress/plugin/index.js file.
 
 ```
 // cypress/plugin/index.js
@@ -250,7 +250,7 @@ module.exports = (on, config) => {
 }
 ```
 
-3. Next, we will also add code to [cypress/support/index.js](https://github.com/QASymphony/cypress-sample/blob/master/cypress/support/index.js) to hooks into **beforeEach()** function, which will be invoked every time a specific test is about to be executed in any spec file. What it does are to:
+3. Next, we will also add code to [cypress/support/index.js](https://github.com/QASymphony/cypress-sample/blob/master/cypress/support/index.js) to hooks into **beforeEach()** function (refer to [this documentation](https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests.html#Support-file for more information on Cypress support file), which will be invoked every time a test is about to be executed in any spec file. What it does are to:
 - Check if there are test names from the global Cyptess.env("tests") whose value are an array which is populated in previous step. If there is no test names from Cyptess.env("tests"), execute this test in Cypress. Workflow ends.
 - Otherwise, if there are test names from Cyptess.env("tests"), try to match the name of the current executing test with a test name in Cyptess.env("tests"). If there is no matching, **skip the test**
 
