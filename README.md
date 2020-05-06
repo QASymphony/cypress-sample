@@ -66,7 +66,7 @@ Follow these steps to integrate this Cypress sample test project with Automation
 
         ```
         if not exist "C:\universal-agent-samples\cypress-sample" (
-         cd /d D:\
+         cd /d C:\universal-agent-samples
          git clone https://github.com/QASymphony/cypress-sample
         ) else (
          cd /d "C:\universal-agent-samples\cypress-sample"
