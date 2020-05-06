@@ -48,7 +48,9 @@ Follow these steps to integrate this Cypress sample test project with Automation
     - Agent Name: Cypress Universal Agent
     - qTest Manager Project: qConnect Sample Project
     - Agent Type: Universal Agent
-    - Pre-Execute Scripts: we will setup Pre-Execute Scripts to clone the source code in this repo to automation host machine (or pull the latest updates if the source code has already existed). 
+    - Pre-Execute Scripts: we will setup Pre-Execute Scripts to clone the source code in this repo to automation host machine (or pull the latest updates if the source code has already existed). For the scripts to work properly, make sure this directory exists in your machine
+        - Mac or Linux: /usr/local/var
+        - Windows: C:\universal-agent-samples
 
         **Mac**
         ```
