@@ -2,7 +2,7 @@
 Sample Cypress project that integrates with qTest Automation Host's Universal Agent. Target audiences of this document are:
 
 - qTest Elite users who are using [Cypress](https://www.cypress.io/) for test automation in their organization and 
-- have certain knowdlege of, and experience with, Cypress. In other words, you are Cypress users and are using this framework for test automation in your organization and
+- have certain knowdlege of, and experience with, Cypress. In other words, you are Cypress users and are using this framework for test automation and
 - want to integrate their Cypress project with qTest Automation Host's Universal Agent and
 - want to leverage qTest to schedule and kick off Cypress test execution, either entire tests in their Cypress project or just some selected tests only, then programmatically submit to qTest Manager for visibility and centalizied management
 
