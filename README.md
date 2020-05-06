@@ -41,35 +41,34 @@ Follow these steps to integrate this Cypress sample test project with Automation
 2. Open web browser and navigate to Automation Host UI at http://localhost:6789 (assuming you installed automation host with  default port, which is 6789. Otherwise, make sure you change the port number 6789 to your port number)
 3. Select `+ Add` button to create a new agent.
 4. On New Agent dialog, enter the followings:
-- Agent Name: Cypress Universal Agent
-- qTest Manager Project: qConnect Sample Project
-- Agent Type: Universal Agent
-- Pre-Execute Scripts: we will setup Pre-Execute Scripts to clone the source code in this repo to automation host machine (or pull the latest updates if the source code has already existed), so make sure these folder is 
-    1. Linux or Mac: /usr/local/var/cypress-sample
+    - Agent Name: Cypress Universal Agent
+    - qTest Manager Project: qConnect Sample Project
+    - Agent Type: Universal Agent
+    - Pre-Execute Scripts: we will setup Pre-Execute Scripts to clone the source code in this repo to automation host machine (or pull the latest updates if the source code has already existed). 
 
-**Mac**
-```
-#!/bin/bash
-if [ ! -d "/usr/local/var/cypress-sample" ]
-then
-  cd "/usr/local/var"
-  git clone git@github.com:QASymphony/cypress-sample.git
-else
-  cd /usr/local/var/cypress-sample
-  git pull --all
-fi
-```
-**Windows**
+    **Mac**
+    ```
+    #!/bin/bash
+    if [ ! -d "/usr/local/var/cypress-sample" ]
+    then
+      cd "/usr/local/var"
+      git clone git@github.com:QASymphony/cypress-sample.git
+    else
+      cd /usr/local/var/cypress-sample
+      git pull --all
+    fi
+    ```
+    **Windows**
 
-```
-if not exist "C:\universal-agent-samples\cypress-sample" (
- cd /d D:\
- git clone https://github.com/QASymphony/cypress-sample
-) else (
- cd /d "C:\universal-agent-samples\cypress-sample"
- git pull --all
-)
-```
+    ```
+    if not exist "C:\universal-agent-samples\cypress-sample" (
+     cd /d D:\
+     git clone https://github.com/QASymphony/cypress-sample
+    ) else (
+     cd /d "C:\universal-agent-samples\cypress-sample"
+     git pull --all
+    )
+    ```
 5. Execute Command
 - Executor: select `node`
 - Working Directory: 
@@ -130,9 +129,9 @@ Your agent now looks like below
 
 1. Universal Agent executes **Pre-Execute Scripts** that pulls the latest source code from [this repo](https://github.com/QASymphony/cypress-sample), if the source code is not available in Automation Host machine in the first time, the script will clone the source code into the machine
 2. Universal Agent executes the scripts configured in **Execute Command**. Since **node** executor is chosen, the Universal Agent will execute the code against embedded NodeJS bundled with Automation Host. The execution includes:
-- Run `npm install` to install node modules declared in package.json file
-- Delete reports folder if it exists. This is to clean the old results generated from previous execution and make sure this reports folder always contains latest execution results
-- Run command to execute Cypress test in Chrome browser and generate junit results in the default reports folder `./node_modules/.bin/cypress run --browser chrome --reporter junit --reporter-options "mochaFile=reports/junit-report-[hash].xml,toConsole=true"`
+    - Run `npm install` to install node modules declared in package.json file
+    - Delete reports folder if it exists. This is to clean the old results generated from previous execution and make sure this reports folder always contains latest execution results
+    - Run command to execute Cypress test in Chrome browser and generate junit results in the default reports folder `./node_modules/.bin/cypress run --browser chrome --reporter junit --reporter-options "mochaFile=reports/junit-report-[hash].xml,toConsole=true"`
 3. When the test execution finished, Universal Agent parses the result in reports folder, which is configured in **Path to Results** field, using the selected **JUnit for Java (built-in)** parser then submits the results as test run logs to qTest Manager.
 
 # Schedule and Kick Off Selected Tests in Cypress
