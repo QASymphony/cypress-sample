@@ -325,7 +325,7 @@ try {
   }
 }
 ```
-5. Now go to qTest Manager's Test Execution. Select some test runs that were created from previous Universal Execution. Select MORE > SCHEDULE. In this sample, we will select the first 3 test runs in the list, as shown below.
+5. Now go to qTest Manager's Test Execution. Select some test runs that were created from previous Universal Agent execution. Select MORE > SCHEDULE. In this sample, we will select the first 3 test runs in the list, as shown below.
 
 ![Select Tests in qTest Manager](/docs/select-tests.png)
 
