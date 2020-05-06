@@ -15,8 +15,8 @@ There also are some extra configurations needed to the cypress project for test 
     - Linux or Mac: `/usr/local/var/cypress-sample-master`
 2. Open Terminal (for Mac or Linux), or Command Prompt if you are on Windows
 3. Navigate to source code folder
-    1. Mac or Linux: `cd /usr/local/var/cypress-sample-master`
-    2. Windows: `cd "C:\universal-agent-samples\cypress-sample-master"`
+    - Mac or Linux: `cd /usr/local/var/cypress-sample-master`
+    - Windows: `cd "C:\universal-agent-samples\cypress-sample-master"`
 4. Run this command to install Cypress: `npm install`
 
 ## Run Cypress test from command line
@@ -46,68 +46,68 @@ Follow these steps to integrate this Cypress sample test project with Automation
     - Agent Type: Universal Agent
     - Pre-Execute Scripts: we will setup Pre-Execute Scripts to clone the source code in this repo to automation host machine (or pull the latest updates if the source code has already existed). 
 
-    **Mac**
-    ```
-    #!/bin/bash
-    if [ ! -d "/usr/local/var/cypress-sample" ]
-    then
-      cd "/usr/local/var"
-      git clone git@github.com:QASymphony/cypress-sample.git
-    else
-      cd /usr/local/var/cypress-sample
-      git pull --all
-    fi
-    ```
-    **Windows**
+        **Mac**
+        ```
+        #!/bin/bash
+        if [ ! -d "/usr/local/var/cypress-sample" ]
+        then
+          cd "/usr/local/var"
+          git clone git@github.com:QASymphony/cypress-sample.git
+        else
+          cd /usr/local/var/cypress-sample
+          git pull --all
+        fi
+        ```
+        **Windows**
 
-    ```
-    if not exist "C:\universal-agent-samples\cypress-sample" (
-     cd /d D:\
-     git clone https://github.com/QASymphony/cypress-sample
-    ) else (
-     cd /d "C:\universal-agent-samples\cypress-sample"
-     git pull --all
-    )
-    ```
+        ```
+        if not exist "C:\universal-agent-samples\cypress-sample" (
+         cd /d D:\
+         git clone https://github.com/QASymphony/cypress-sample
+        ) else (
+         cd /d "C:\universal-agent-samples\cypress-sample"
+         git pull --all
+        )
+        ```
 5. Execute Command
-- Executor: select `node`
-- Working Directory: 
-    1. Mac or Linux: `/usr/local/var/cypress-sample`
-    2. Windows: `C:\universal-agent-samples\cypress-sample`  
-- Enter the scripts below to the code area of Execute Command
+    - Executor: select `node`
+    - Working Directory: 
+        - Mac or Linux: `/usr/local/var/cypress-sample`
+        - Windows: `C:\universal-agent-samples\cypress-sample`  
+    - Enter the scripts below to the code area of Execute Command
 
-```
-const path = require('path');
-const fs = require('fs');
-const { execSync } = require('child_process');
+        ```
+        const path = require('path');
+        const fs = require('fs');
+        const { execSync } = require('child_process');
 
-const isWin = process.platform == 'win32';
-const workingDir = process.env.WORKING_DIR;
-const reportDirName = 'reports';
-const reportDir = path.resolve(workingDir, reportDirName);
+        const isWin = process.platform == 'win32';
+        const workingDir = process.env.WORKING_DIR;
+        const reportDirName = 'reports';
+        const reportDir = path.resolve(workingDir, reportDirName);
 
-// install node module with below command
-execSync('npm install', { cwd: workingDir, stdio: 'inherit'});
+        // install node module with below command
+        execSync('npm install', { cwd: workingDir, stdio: 'inherit'});
 
-// delete report dir if it exists to make sure we will have a latest reports after execution
-if (fs.existsSync(reportDir)) {
-  let deleteCommand = isWin ? `rmdir /s /q "${reportDir}"` : `rm -rf "${reportDir}"`;
-  execSync(deleteCommand, { cwd: workingDir, stdio: 'inherit'});
-}
+        // delete report dir if it exists to make sure we will have a latest reports after execution
+        if (fs.existsSync(reportDir)) {
+          let deleteCommand = isWin ? `rmdir /s /q "${reportDir}"` : `rm -rf "${reportDir}"`;
+          execSync(deleteCommand, { cwd: workingDir, stdio: 'inherit'});
+        }
 
-try {
-  let cypressCommand = isWin ? 'node_modules\\.bin\\cypress' : 'node_modules/.bin/cypress';
-  let reporterOptions = isWin ? 'mochaFile=reports\\junit-report-[hash].xml,toConsole=true' : 'mochaFile=reports/junit-report-[hash].xml,toConsole=true';
-  let testCommand = `${cypressCommand} run --browser chrome --reporter junit --reporter-options "${reporterOptions}"`;
-  console.log(`executing testCommand: ${testCommand}`);
-  execSync(testCommand, { cwd: workingDir, stdio: 'inherit'});
-} catch (error) {
-  console.error('Error executing test: ' + error);
-}
-```
+        try {
+          let cypressCommand = isWin ? 'node_modules\\.bin\\cypress' : 'node_modules/.bin/cypress';
+          let reporterOptions = isWin ? 'mochaFile=reports\\junit-report-[hash].xml,toConsole=true' : 'mochaFile=reports/junit-report-[hash].xml,toConsole=true';
+          let testCommand = `${cypressCommand} run --browser chrome --reporter junit --reporter-options "${reporterOptions}"`;
+          console.log(`executing testCommand: ${testCommand}`);
+          execSync(testCommand, { cwd: workingDir, stdio: 'inherit'});
+        } catch (error) {
+          console.error('Error executing test: ' + error);
+        }
+        ```
 6. Path to Results: enter path to test result folder that is relative to the source folder
-- Mac: enter `/usr/local/var/cypress-sample/reports`
-- Windows: enter `C:\universal-agent-samples\cypress-sample\reports`
+    - Mac or Linux: `/usr/local/var/cypress-sample/reports`
+    - Windows: `C:\universal-agent-samples\cypress-sample\reports`
 7. Result Parser: select `JUnit for Java (built-in)`
 
 Your agent now looks like below
