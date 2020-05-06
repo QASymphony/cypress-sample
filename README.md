@@ -6,7 +6,7 @@ Sample Cypress project that integrates with qTest Automation Host's Universal Ag
 - want to integrate their Cypress project with qTest Automation Host's Universal Agent and
 - want to leverage qTest to schedule and kick off Cypress test execution, either entire tests in their Cypress project or just some selected tests only, then programmatically submit to qTest Manager for visibility and centalizied management
 
-** Notes:** there are extra configurations/hooks needed to be put into the cypress project for [test scheduling](https://documentation.tricentis.com/qtest/od/en/content/qtest_launch/launch_user_guides/schedule_and_kick_off_test_automation_in_qtest_launch.htm) to work in qTest Launch and Universal Agent. When you get this sample up and running properly and want to integrate your actual Cypress project with Universal Agent, make sure you follow the section **Schedule and Kick Off Selected Tests in Cypress** at the end of this document.
+**Notes:** there are extra configurations/hooks needed to be put into the cypress project for [test scheduling](https://documentation.tricentis.com/qtest/od/en/content/qtest_launch/launch_user_guides/schedule_and_kick_off_test_automation_in_qtest_launch.htm) to work in qTest Launch and Universal Agent. When you get this sample up and running properly and want to integrate your actual Cypress project with Universal Agent, make sure you follow the section **Schedule and Kick Off Selected Tests in Cypress** at the end of this document.
 
 ## Pre-requitesites
 1. [Git](https://git-scm.com/downloads) client installed. To verify if git client is installed properly, open Command Prompt on Windows, or Terminal on Mac, then execute this command `git --version`
