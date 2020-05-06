@@ -1,11 +1,13 @@
 # cypress-sample
 Cypress project that integrates with qTest Automation Host's Universal Agent. Target audiences of this document are:
 
-    - qTest users who are using [Cypress](https://www.cypress.io/) for test automation in their organization and 
-    - want to integrate their Cypress project with qTest Automation Host's Universal Agent and/or
-    - want to leverage qTest Launch to:
-        - schedule and kick off Cypress test execution, either entire tests in their Cypress project or just some selected tests only and/or
-        - collect Cypress execution results an submit to qTest Manager for visibility and centalizied management
+- qTest Elite users who are using [Cypress](https://www.cypress.io/) for test automation in their organization and 
+- have certain knowdlege of, and experience with, [Cypress](https://www.cypress.io/). In other words, you are Cypress users and are using this framework for test automation in your organization and
+- you want to leverage qTest's test automation scheduling to schedule and manage automated test in your organization
+- want to integrate their Cypress project with qTest Automation Host's Universal Agent and/or
+- want to leverage qTest Launch to:
+    - schedule and kick off Cypress test execution, either entire tests in their Cypress project or just some selected tests only and
+    - collect Cypress execution results an submit to qTest Manager for visibility and centalizied management
 
 ** Notes:** there are extra configurations/hooks needed to be put into the cypress project for [test scheduling](https://documentation.tricentis.com/qtest/od/en/content/qtest_launch/launch_user_guides/schedule_and_kick_off_test_automation_in_qtest_launch.htm) to work in qTest Launch and Universal Agent. When you get this sample up and running properly and want to integrate your actual Cypress project with Universal Agent, make sure you follow the section **Schedule and Kick Off Selected Tests in Cypress** at the end of this document.
 
