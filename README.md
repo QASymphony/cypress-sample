@@ -177,7 +177,7 @@ cypress run --env tests="/path/to/testruns_list.json"
 
 2. Next, in our Cypress project, we will add code to the plugin (refer to [this documentation](https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests.html#Plugin-files) for more information on Cypress plugin), which is conventionally located at <path/to/your/project>/cypress/plugin/index.js, for it to loads test runs' automation contents from the file `testruns_list.json`, then push them to the Global object Cypress.env("tests") as an array of test names that we will use later. Below is the code that we will put into cypress/plugin/index.js. **Note:** you do not need to do this as the code has already available in this sample project at [cypress/plugin/index.js](https://github.com/QASymphony/cypress-sample/blob/master/cypress/plugins/index.js)), however, when integrating your actual Cypress project, make sure you put this code into your cypress/plugin/index.js file.
 
-```
+```javascript
 // cypress/plugin/index.js
 /**
 * Add this function to cypress/plugin/index.js
@@ -258,7 +258,7 @@ module.exports = (on, config) => {
 
 Below code demonstrates this step. Again, the code has already been put into [cypress/support/index.js](https://github.com/QASymphony/cypress-sample/blob/master/cypress/support/index.js) so you do not need to do this. However, when you integrate your actual Cypress project, make sure you put this code into your cypress/support/index.js file.
 
-```
+```javascript
 // cypress/support/index.js
 beforeEach(function() {
   var getCurrentExecutingTestName = (currentTest) => {
@@ -298,7 +298,7 @@ beforeEach(function() {
 ```
 4. Now go back to our Cypress Universal Agent. Select Edit. Put these updated code to Execute Command:
 
-```
+```javascript
 const path = require('path');
 const fs = require('fs');
 const { execSync } = require('child_process');
