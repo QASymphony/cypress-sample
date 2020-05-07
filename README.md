@@ -82,7 +82,7 @@ Follow these steps to integrate this Cypress sample test project with Automation
         - Windows: `C:\universal-agent-samples\cypress-sample`  
     - Enter the scripts below to the code area of Execute Command
 
-        ```
+        ```javascript
         const path = require('path');
         const fs = require('fs');
         const { execSync } = require('child_process');
