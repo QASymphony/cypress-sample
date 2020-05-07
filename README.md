@@ -175,7 +175,7 @@ The approach is to save the scheduled test runs (again, contained in the **$TEST
 cypress run --env tests="/path/to/testruns_list.json"
 ```
 
-2. Next, in our Cypress project, we will add code to the plugin (refer to [this documentation](https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests.html#Plugin-files) for more information on Cypress plugin), which is conventionally located at <path/to/your/project>/cypress/plugin/index.js, for it to loads test runs' automation contents from the file `testruns_list.json`, then push them to the Global object Cypress.env("tests") as an array of test names that we will use later. Below is the code that we will put into cypress/plugin/index.js. **Note:** you do not need to do this as the code has already available in this sample project at [cypress/plugin/index.js](https://github.com/QASymphony/cypress-sample/blob/master/cypress/plugins/index.js)), however, when integrating your actual Cypress project, make sure you put this code into your cypress/plugin/index.js file.
+2. Next, in our Cypress project, we will add code to the plugin (refer to [this documentation](https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests.html#Plugin-files) for more information on Cypress plugin), which is conventionally located at <path/to/your/project>/cypress/plugin/index.js, for it to loads test runs' automation contents from the file `testruns_list.json`, then push them to the Global object Cypress.env("tests") as an array of test names that we will use later. Below is the code that we will put into cypress/plugin/index.js. **Note:** you do not need to do this as the code is already available in this sample project at [cypress/plugin/index.js](https://github.com/QASymphony/cypress-sample/blob/master/cypress/plugins/index.js)), however, when integrating your actual Cypress project, make sure you put this code into your cypress/plugin/index.js file.
 
 ```javascript
 // cypress/plugin/index.js
@@ -184,8 +184,8 @@ cypress run --env tests="/path/to/testruns_list.json"
 */
 var readTestRunsFromEnvVar = (config) => {
   // if a testrun list file is specified in the run command via --env tests='<filename>', 
-  // read the file to collect desired test names to be executed, and also update the config to contains test names only
-  // the values of test names will be use later in support/index.js's beforeEach() function
+  // read the file to collect desired test names to be executed, and also update the config object to store the test names
+  // the values of test names will be use later in cypress/support/index.js's beforeEach() function
   // to decide whether or not a test should be skipped
   if (config.env.tests == undefined || config.env.tests.trim() == '') {
     return;
@@ -214,6 +214,11 @@ var readTestRunsFromEnvVar = (config) => {
       testcase.properties.forEach(prop => {
         if (prop.field_name == 'Automation Content') {
           let automationContent = prop.field_value;
+          // value of automation content is under below format:
+          //    <test title>#[<context name> <describe name>] <test title>
+          // we only want to collect the test name after '#' character
+          // to obtain '<context name> <describe name> <test title>' only
+          //
           let index = automationContent.indexOf('#');
           if (index > -1) {
             let testName = htmlDecode(automationContent.substring(index + 1));
@@ -227,7 +232,7 @@ var readTestRunsFromEnvVar = (config) => {
     if (testNames.length > 0) {
       console.log(`There are ${testNames.length} tests specified to be executed --env tests='${testRunsFilePath}'`);
       // this is important in order for Cypress to 'fetch' the updated value of tests env 
-      // to Cypress global object and make available during execution
+      // into Cypress.env("tests") global object and make available during execution
       config.env.tests = testNames;
       return;
     }
