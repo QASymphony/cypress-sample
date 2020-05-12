@@ -322,6 +322,8 @@ if (fs.existsSync(reportDir)) {
   execSync(deleteCommand, { cwd: workingDir, stdio: 'inherit'});
 }
 
+// let's kick the tire and light the fire
+//
 let testrunsListFilePath = '';
 try {
   /**
