@@ -366,3 +366,6 @@ try {
 9. Wait for the execution completes then go to qTest Manager's Test Execution to verify that the 3 test runs have been executed in Cypress and their results are submitted. Screenshot below shows the first test run having **Execution History** increased to 2.
 
 ![Execution History](/docs/execution-history.png)
+
+# Demo Video
+[![Integrate Cypress with qTest](/docs/video.png)](https://www.youtube.com/watch?v=vNrEUgJUvk0)
