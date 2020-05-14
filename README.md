@@ -167,7 +167,7 @@ At the time of this writing, Cypress does not support running a specific test (t
 cypress run --env tests="<selected tests to run>"
 ```
 
-However, in reality, the scheduled test runs can be plenty as qTest user are allowed to schedule unlimited test runs. We will not pass the test runs (with any sort of delimiters) to the Cypress command because we will end up facing the limit for the maximum length of shell/bash command specific to an Operating System. 
+However, in reality, the scheduled test runs can be plenty as qTest user are allowed to schedule unlimited test runs. So we will not pass the test runs (with any sort of delimiters) to the Cypress command since we will end up facing the limit for the maximum length of shell/bash command specific to an Operating System. 
 
 The approach is to save the scheduled test runs (again, contained in the **$TESTRUNS_LIST** magic variable) to a json file then pass the file path to Cypress' run command. So the Cypress command will be something like this: 
 
@@ -175,18 +175,19 @@ The approach is to save the scheduled test runs (again, contained in the **$TEST
 cypress run --env tests="/path/to/testruns_list.json"
 ```
 
-2. Next, in our Cypress project, we will add code to the plugin (refer to [this documentation](https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests.html#Plugin-files) for more information on Cypress plugin), which is conventionally located at <path/to/your/project>/cypress/plugin/index.js, for it to loads test runs' automation contents from the file `testruns_list.json`, then push them to the Global object Cypress.env("tests") as an array of test names that we will use later. Below is the code that we will put into cypress/plugin/index.js. **Note:** you do not need to do this as the code is already available in this sample project at [cypress/plugin/index.js](https://github.com/QASymphony/cypress-sample/blob/master/cypress/plugins/index.js)), however, when integrating your actual Cypress project, make sure you put this code into your cypress/plugin/index.js file.
+2. Next, in our Cypress project, we will add code to the plugin (refer to [this documentation](https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests.html#Plugin-files) for more information on Cypress plugin), which is conventionally located at <path/to/your/project>/cypress/plugin/index.js, for it to loads test runs' automation contents from the file `testruns_list.json`, then push them to the Global object Cypress.env("tests") as an array of test names that we will use later. Below is the code that we will put into cypress/plugin/index.js. **Note:** you do not need to do this as the code is already available in this sample project at [cypress/plugin/index.js](https://github.com/QASymphony/cypress-sample/blob/master/cypress/plugins/index.js), however, when integrating your actual Cypress project, make sure you put this code into your cypress/plugin/index.js file.
 
 ```javascript
 // cypress/plugin/index.js
-/**
-* Add this function to cypress/plugin/index.js
-*/
+//
+// Add this function to <path-to-your-cypress-project>/cypress/plugin/index.js. 
+// What it does is to check if a testrun list file is specified in the run command via --env tests='<filename>', then
+// read the file to collect desired test names to be executed, and store them back to the config.env.tests var
+// The values of test names will be used later in cypress/support/index.js's beforeEach() function
+// to decide whether or not a test should be run or skipped
+//
 var readTestRunsFromEnvVar = (config) => {
-  // if a testrun list file is specified in the run command via --env tests='<filename>', 
-  // read the file to collect desired test names to be executed, and also update the config object to store the test names
-  // the values of test names will be use later in cypress/support/index.js's beforeEach() function
-  // to decide whether or not a test should be skipped
+  // if a testrun list file is not specified via cypress run command, do nothing
   if (config.env.tests == undefined || config.env.tests.trim() == '') {
     return;
   }
@@ -251,14 +252,14 @@ module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
 
-  /** add these 2 line of code to read test runs from file */
+  // it IS important to return config object
   readTestRunsFromEnvVar(config);
   return config;
 }
 ```
 
 3. Next, we will also add code to [cypress/support/index.js](https://github.com/QASymphony/cypress-sample/blob/master/cypress/support/index.js) to hooks into **beforeEach()** function (refer to [this documentation](https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests.html#Support-file) for more information on Cypress support file), which will be run every time a test is about to be executed in any spec file. What it does are to:
-- Check if there are test names from the global Cyptess.env("tests") whose value are an array which is populated in previous step. If there is no test names from Cyptess.env("tests"), execute this test in Cypress. Workflow ends.
+- Check if there are test names from the global Cyptess.env("tests") whose value are an array which is populated in previous step. If there is no test names from Cyptess.env("tests"), execute this test in Cypress
 - Otherwise, if there are test names from Cyptess.env("tests"), try to match the name of the current executing test with a test name in Cyptess.env("tests"). If there is no matching, **skip the test**
 
 Below code demonstrates this step. Again, the code has already been put into [cypress/support/index.js](https://github.com/QASymphony/cypress-sample/blob/master/cypress/support/index.js) so you do not need to do this. However, when you integrate your actual Cypress project, make sure you put this code into your cypress/support/index.js file.
