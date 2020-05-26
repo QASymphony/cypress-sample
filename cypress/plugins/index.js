@@ -35,7 +35,10 @@ var readTestRunsFromEnvVar = (config) => {
     };
 
     let content = fs.readFileSync(testRunsFilePath, 'utf8');
-    let testRunListObject = JSON.parse(content);
+    // parse test runs to JSON, as well sort them by testrun.order
+    let testRunListObject = JSON.parse(content).sort((testrun1, testrun2) => {
+      return testrun1.order - testrun2.order;
+    });
     let testNames = [];
     testRunListObject.forEach(testrun => {
       let testcase = testrun.test_case;
