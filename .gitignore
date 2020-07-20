@@ -1,6 +1,7 @@
 node_modules
 .vscode
 reports
+package-lock.json
 cypress/fixtures/*
 cypress/screenshots*
 cypress/videos/*
