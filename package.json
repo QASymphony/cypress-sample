@@ -19,6 +19,6 @@
   },
   "homepage": "https://github.com/QASymphony/cypress-sample#readme",
   "devDependencies": {
-    "cypress": "^4.4.1"
+    "cypress": "^4.10.0"
   }
 }
