@@ -60,7 +60,7 @@ Follow these steps to integrate this Cypress sample test project with Automation
           cd "/usr/local/var"
           git clone git@github.com:QASymphony/cypress-sample.git
         else
-          cd /usr/local/var/cypress-sample
+          cd "/usr/local/var/cypress-sample"
           git pull --all
         fi
         ```
