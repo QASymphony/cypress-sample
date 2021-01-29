@@ -64,7 +64,6 @@ var readTestRunsFromEnvVar = (config) => {
     } else {
       console.log(`No test names found in --env tests='${testRunsFilePath}'`);
     }
-    process.exit(0);
   } catch (error) {
     console.log(`error reading test runs at '${testRunsFilePath}: ${error}`);
   } 
